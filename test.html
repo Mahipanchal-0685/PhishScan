@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishScan Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .section {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .link-container {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #f9f9f9;
+        }
+        .test-form {
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #f9f9f9;
+        }
+        .test-form input {
+            margin: 5px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .test-form button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .test-form button:hover {
+            background: #0056b3;
+        }
+        .instructions {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 20px;
+        }
+        .warning {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 20px;
+        }
+        .success {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #28a745;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        h2 {
+            color: #555;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        .api-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
+        }
+        .api-info h3 {
+            margin-top: 0;
+            color: #495057;
+        }
+        .api-info ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .api-info li {
+            margin: 5px 0;
+        }
+        .api-info code {
+            background: #e9ecef;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 PhishScan Extension Test Page</h1>
+
+    <div class="instructions">
+        <h3>How to use this page</h3>
+        <p>1. Make sure the PhishScan extension is installed and enabled.</p>
+        <p>2. Reload this page to trigger a scan.</p>
+        <p>3. Observe the red borders and warning icons on malicious elements.</p>
+        <p>4. <strong>Hover</strong> over flagged elements to see the new Tooltips.</p>
+        <p>5. <strong>Click</strong> on a flagged link to test the Warning Modal.</p>
+    </div>
+
+    <div class="section">
+        <h2>🤖 Heuristic Detection (New Feature)</h2>
+        <p>These URLs are detected locally based on suspicious patterns, without needing an API key:</p>
+        
+        <div class="link-container">
+            <a href="http://192.168.1.105/login.php" target="_blank">Test Link 1: IP-Based URL (Suspicious)</a>
+        </div>
+        
+        <div class="link-container">
+            <a href="http://secure-verify-account-update.xyz" target="_blank">Test Link 2: Suspicious Keywords + TLD</a>
+        </div>
+        
+        <div class="link-container">
+            <a href="http://my-bank-login-secure-update-verify.com" target="_blank">Test Link 3: Keyword Stuffing</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔘 Button Detection (New Feature)</h2>
+        <p>Buttons with suspicious text (Pay, Verify, Login) are now scanned:</p>
+        
+        <div class="link-container">
+            <!-- Button with data-href or onclick -->
+            <button class="btn" style="background: red; color: white; padding: 10px 20px;" onclick="location.href='http://auspostac.world'">Pay Now</button> 
+            <small>(Clicking should trigger warning modal? Or highlight on load?)</small>
+        </div>
+        
+        <div class="link-container">
+            <button class="btn" data-href="http://meta-maskloig.godaddysites.com">Verify Identity</button>
+            <small>(Button with data-href attribute)</small>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔗 Known Malicious Links</h2>
+        <p>These links should be flagged by OpenPhish database or APIs:</p>
+        
+        <div class="link-container">
+            <a href="http://auspostac.world/index.html" target="_blank">AusPost Phish</a>
+        </div>
+        
+        <div class="link-container">
+            <a href="https://meta-maskloig.godaddysites.com" target="_blank">MetaMask Phishing</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔗 Shortened URL Tests</h2>
+        <p>These shortened URLs should be resolved and checked:</p>
+        
+        <div class="link-container">
+            <a href="https://bit.ly/3QZqX9Y" target="_blank">Shortened URL 1</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Test Forms</h2>
+        <p>These forms have malicious action URLs:</p>
+        
+        <div class="test-form">
+            <form action="http://auspostac.world/login.php" method="post">
+                <input type="text" placeholder="Username" name="username">
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>✅ Safe Links</h2>
+        <p>These should be safe:</p>
+        
+        <div class="link-container">
+            <a href="https://www.google.com" target="_blank">Google</a>
+        </div>
+    </div>
+    
+    <script>
+        console.log('PhishScan Test Page loaded');
+    </script>
+</body>
+</html>

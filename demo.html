@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishScan Extension Demo Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      padding: 24px;
+      background: #f9fafb;
+      border-radius: 12px;
+      border-left: 4px solid #667eea;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #1f2937;
+    }
+
+    .section p {
+      margin-bottom: 16px;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+
+    .links-container {
+      display: grid;
+      gap: 16px;
+    }
+
+    .link-item {
+      padding: 16px;
+      background: white;
+      border-radius: 8px;
+      border: 2px solid #e5e7eb;
+      transition: all 0.2s;
+    }
+
+    .link-item:hover {
+      border-color: #667eea;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+    }
+
+    .link-item a {
+      display: block;
+      font-size: 16px;
+      color: #667eea;
+      text-decoration: none;
+      margin-bottom: 8px;
+      word-break: break-all;
+    }
+
+    .link-item a:hover {
+      text-decoration: underline;
+    }
+
+    .link-description {
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    .warning-box {
+      background: #fef3c7;
+      border: 2px solid #fbbf24;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      color: #92400e;
+    }
+
+    .info-box {
+      background: #dbeafe;
+      border: 2px solid #3b82f6;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      color: #1e40af;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .status-badge.malicious {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .status-badge.safe {
+      background: #d1fae5;
+      color: #16a34a;
+    }
+
+    .status-badge.test {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .shortened-url-demo {
+      background: #f3f4f6;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 8px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    .form-example {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      border: 2px solid #e5e7eb;
+      margin-top: 16px;
+    }
+
+    .form-example form {
+      display: flex;
+      gap: 8px;
+    }
+
+    .form-example input {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .form-example button {
+      padding: 10px 20px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .instructions {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+
+    .instructions h3 {
+      color: #1e40af;
+      margin-bottom: 12px;
+    }
+
+    .instructions ol {
+      margin-left: 20px;
+      color: #1e40af;
+    }
+
+    .instructions li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🛡️ PhishScan Extension Demo Page</h1>
+    <p class="subtitle">This page demonstrates automatic URL scanning and highlighting capabilities</p>
+
+    <div class="instructions">
+      <h3>📋 How to Use This Demo</h3>
+      <ol>
+        <li>Make sure the PhishScan extension is installed and enabled</li>
+        <li>Open the extension popup to see scanning status</li>
+        <li>Observe how malicious URLs are highlighted with red borders and ⚠️ icons</li>
+        <li>Notice how safe URLs are marked with ✅ checkmarks</li>
+        <li>Hover over shortened URLs to see the expanded destination</li>
+        <li>Click the extension icon to view detailed VirusTotal analysis</li>
+      </ol>
+    </div>
+
+    <!-- Safe URLs Section -->
+    <div class="section">
+      <h2>✅ Safe URLs (Legitimate Websites)</h2>
+      <p>These URLs should be marked as safe with green checkmarks. They are from trusted domains and should pass VirusTotal checks.</p>
+      
+      <div class="info-box">
+        <strong>ℹ️ Note:</strong> These are legitimate URLs from trusted sources. The extension should verify them as safe using VirusTotal.
+      </div>
+
+      <div class="links-container">
+        <div class="link-item">
+          <a href="https://www.google.com" target="_blank">https://www.google.com</a>
+          <div class="link-description">Google - Should be verified safe</div>
+        </div>
+
+        <div class="link-item">
+          <a href="https://www.github.com" target="_blank">https://www.github.com</a>
+          <div class="link-description">GitHub - Trusted development platform</div>
+        </div>
+
+        <div class="link-item">
+          <a href="https://www.stackoverflow.com" target="_blank">https://www.stackoverflow.com</a>
+          <div class="link-description">Stack Overflow - Developer Q&A platform</div>
+        </div>
+
+        <div class="link-item">
+          <a href="https://www.wikipedia.org" target="_blank">https://www.wikipedia.org</a>
+          <div class="link-description">Wikipedia - Online encyclopedia</div>
+        </div>
+
+        <div class="link-item">
+          <a href="https://www.mozilla.org" target="_blank">https://www.mozilla.org</a>
+          <div class="link-description">Mozilla - Trusted open-source organization</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Test URLs Section (May be flagged) -->
+    <div class="section">
+      <h2>🧪 Test URLs (Known Phishing Examples)</h2>
+      <p>These URLs are known phishing examples from the OpenPhish database. They should be flagged as malicious with red borders and warning icons.</p>
+      
+      <div class="warning-box">
+        <strong>⚠️ Warning:</strong> These are known malicious/phishing URLs from security databases. Do NOT click these links. They are for demonstration purposes only.
+      </div>
+
+      <div class="links-container">
+        <div class="link-item">
+          <a href="http://auspostac.world" target="_blank">http://auspostac.world</a>
+          <div class="link-description">Known phishing domain (Australian Post impersonation)</div>
+        </div>
+
+        <div class="link-item">
+          <a href="http://meta-maskloig.godaddysites.com" target="_blank">http://meta-maskloig.godaddysites.com</a>
+          <div class="link-description">MetaMask phishing attempt</div>
+        </div>
+
+        <div class="link-item">
+          <a href="http://netflix-web.vercel.app" target="_blank">http://netflix-web.vercel.app</a>
+          <div class="link-description">Netflix phishing site</div>
+        </div>
+
+        <div class="link-item">
+          <a href="http://connect-ledger-login.typedream.app" target="_blank">http://connect-ledger-login.typedream.app</a>
+          <div class="link-description">Ledger wallet phishing attempt</div>
+        </div>
+
+        <div class="link-item">
+          <a href="http://walletconnect-website.vercel.app" target="_blank">http://walletconnect-website.vercel.app</a>
+          <div class="link-description">WalletConnect phishing site</div>
+        </div>
+
+        <div class="link-item">
+          <a href="http://schwabprotection.com" target="_blank">http://schwabprotection.com</a>
+          <div class="link-description">Charles Schwab phishing attempt</div>
+        </div>
+
+        <div class="link-item">
+          <a href="http://coinbaselogindesk.blogspot.com.ee" target="_blank">http://coinbaselogindesk.blogspot.com.ee</a>
+          <div class="link-description">Coinbase phishing site</div>
+        </div>
+
+        <div class="link-item">
+          <a href="http://steamcomunnitty.cc" target="_blank">http://steamcomunnitty.cc</a>
+          <div class="link-description">Steam community phishing site</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shortened URLs Section -->
+    <div class="section">
+      <h2>🔗 Shortened URLs Demo</h2>
+      <p>These are shortened URLs. The extension should automatically resolve them and check the final destination. Hover over them to see the expanded URL.</p>
+
+      <div class="links-container">
+        <div class="link-item">
+          <a href="https://bit.ly/3example" target="_blank">https://bit.ly/3example</a>
+          <div class="link-description">Example bit.ly shortened URL (may resolve or show placeholder)</div>
+          <div class="shortened-url-demo">
+            💡 The extension will attempt to resolve this and show the destination in a tooltip on hover
+          </div>
+        </div>
+
+        <div class="link-item">
+          <a href="https://tinyurl.com/example-test" target="_blank">https://tinyurl.com/example-test</a>
+          <div class="link-description">Example TinyURL (test link)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Action Demo -->
+    <div class="section">
+      <h2>📝 Form Action URL Scanning</h2>
+      <p>The extension also scans form action URLs. Below is a demo form that will be checked.</p>
+
+      <div class="form-example">
+        <form action="http://example-phishing-form.com/submit" method="post">
+          <input type="email" placeholder="Enter email" name="email">
+          <button type="submit">Submit</button>
+        </form>
+        <div class="link-description" style="margin-top: 12px;">
+          The form action URL above should be scanned by the extension. In a real scenario, this would be checked for malicious content.
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Content Section -->
+    <div class="section">
+      <h2>🔄 Dynamic Content Testing</h2>
+      <p>This section demonstrates scanning of dynamically added content. Click the button below to add new links programmatically.</p>
+
+      <button id="add-dynamic-link" style="padding: 12px 24px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-bottom: 16px;">
+        Add Dynamic Link
+      </button>
+
+      <div id="dynamic-links-container" class="links-container">
+        <!-- Dynamic links will be added here -->
+      </div>
+    </div>
+
+    <!-- VirusTotal Integration Info -->
+    <div class="section">
+      <h2>🛡️ VirusTotal Integration</h2>
+      <p>This extension uses VirusTotal API for real-time URL scanning. Each URL is checked against 70+ antivirus engines.</p>
+      
+      <div class="info-box">
+        <strong>📊 What You'll See:</strong>
+        <ul style="margin-left: 20px; margin-top: 8px;">
+          <li>Malicious URLs: Red borders with ⚠️ warning icons</li>
+          <li>Safe URLs: Green ✅ checkmarks (when verified by VirusTotal)</li>
+          <li>Detailed analysis: Click links in the popup to see full VirusTotal reports</li>
+          <li>Detection ratios: See how many engines flagged each URL</li>
+          <li>Threat labels: Categories and classifications from VirusTotal</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Extension Status -->
+    <div class="section">
+      <h2>📱 Extension Status</h2>
+      <p>Click the PhishScan extension icon in your browser toolbar to:</p>
+      <ul style="margin-left: 20px; margin-top: 8px;">
+        <li>View total URLs scanned on this page</li>
+        <li>See count of malicious and safe URLs detected</li>
+        <li>Check URLs manually using the input field</li>
+        <li>View detailed VirusTotal analysis reports</li>
+        <li>See a summary table of all scanned URLs</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Dynamic content demo
+    let dynamicLinkCount = 0;
+    document.getElementById('add-dynamic-link').addEventListener('click', () => {
+      dynamicLinkCount++;
+      const container = document.getElementById('dynamic-links-container');
+      
+      const linkItem = document.createElement('div');
+      linkItem.className = 'link-item';
+      
+      // Alternate between safe and test URLs
+      const isTest = dynamicLinkCount % 2 === 0;
+      const testUrl = 'http://example-phishing-test-' + dynamicLinkCount + '.com';
+      const safeUrl = 'https://www.example-safe-' + dynamicLinkCount + '.com';
+      
+      linkItem.innerHTML = `
+        <a href="${isTest ? testUrl : safeUrl}" target="_blank">${isTest ? testUrl : safeUrl}</a>
+        <div class="link-description">
+          Dynamically added link #${dynamicLinkCount} 
+          <span class="status-badge ${isTest ? 'test' : 'safe'}">
+            ${isTest ? 'Test URL' : 'Safe URL'}
+          </span>
+        </div>
+      `;
+      
+      container.appendChild(linkItem);
+      
+      // Trigger extension scan (if it's monitoring DOM changes)
+      console.log('Dynamic link added - extension should detect and scan it');
+    });
+
+    // Log page load for debugging
+    console.log('PhishScan Demo Page Loaded');
+    console.log('Total links on page:', document.querySelectorAll('a[href]').length);
+  </script>
+</body>
+</html>

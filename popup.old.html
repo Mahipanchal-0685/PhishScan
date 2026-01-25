@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PhishScan - VirusTotal Integration</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>🛡️ PhishScan</h1>
+      <p class="subtitle">Advanced URL Threat Detection</p>
+    </div>
+    
+    <!-- Toggle Section -->
+    <div class="toggle-section">
+      <label class="switch">
+        <input type="checkbox" id="toggle">
+        <span class="slider"></span>
+        <span id="toggle-label">Detection ON</span>
+      </label>
+    </div>
+    
+    <!-- Language Selector -->
+    <div class="language-section" style="margin: 10px 0; padding: 8px; background: #f3f4f6; border-radius: 6px;">
+      <label for="language-select" style="font-size: 12px; color: #4b5563; display: block; margin-bottom: 4px;">🌐 Language / भाषा / ભાષા:</label>
+      <select id="language-select" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db; font-size: 12px;">
+        <option value="en">English</option>
+        <option value="hi">हिंदी (Hindi)</option>
+        <option value="gu">ગુજરાતી (Gujarati)</option>
+      </select>
+    </div>
+    
+    <!-- Stats Section -->
+    <div class="stats-section" id="stats-section">
+      <div class="stat-card">
+        <div class="stat-value" id="total-scanned">0</div>
+        <div class="stat-label">URLs Scanned</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value threat" id="malicious-count">0</div>
+        <div class="stat-label">Threats Found</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value safe" id="clean-count">0</div>
+        <div class="stat-label">Verified Safe</div>
+      </div>
+    </div>
+    
+    <!-- Status Message -->
+    <div id="status" class="status">Checking...</div>
+    
+    <!-- Threats List -->
+    <div class="threats-section" id="threats-section" style="display: none;">
+      <h3>⚠️ Detected Threats</h3>
+      <ul id="malicious-list"></ul>
+    </div>
+    
+    <!-- Recent Scans Summary -->
+    <div class="summary-section" id="summary-section" style="display: none;">
+      <h3>📊 Recent Scans</h3>
+      <div class="summary-table" id="summary-table"></div>
+    </div>
+    
+    <!-- Actions -->
+    <div class="actions-section">
+      <button id="refresh-btn" class="refresh-btn">🔄 Refresh Scan</button>
+      <button id="view-details-btn" class="details-btn" style="display: none;">📋 View Details</button>
+    </div>
+  </div>
+  
+  <!-- Detailed Analysis Modal -->
+  <div id="details-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>📊 VirusTotal Detailed Analysis</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Detailed analysis will be inserted here -->
+      </div>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
